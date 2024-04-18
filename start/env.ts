@@ -27,5 +27,15 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_PORT: Env.schema.number(),
   DB_USER: Env.schema.string(),
   DB_PASSWORD: Env.schema.string.optional(),
-  DB_DATABASE: Env.schema.string()
+  DB_DATABASE: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for Football API
+  |----------------------------------------------------------
+  */
+  FOOTBALL_API_KEY: Env.schema.string(),
+  FOOTBALL_API_ENDPOINT: Env.schema.string(),
+  FOOTBALL_API_LEAGUE_ID: Env.schema.number(),
+  FOOTBALL_API_SEASON: Env.schema.number(),
 })
