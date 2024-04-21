@@ -1,0 +1,57 @@
+name: Update Data
+on:
+  workflow_dispatch:
+  # schedule:
+
+env:
+  NODE_ENV: production
+  APP_KEY: ${{ secrets.APP_KEY }}
+  HOST: ${{ secrets.HOST }}
+  LOG_LEVEL: info
+  TZ: UTC
+  DB_DATABASE: ${{ secrets.DB_DATABASE }}
+  DB_HOST: ${{ secrets.DB_HOST }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_PORT: ${{ secrets.DB_PORT }}
+  DB_USER: ${{ secrets.DB_USER }}
+  FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+  FOOTBALL_API_ENDPOINT: ${{ secrets.FOOTBALL_API_ENDPOINT }}
+  FOOTBALL_API_LEAGUE_ID: 62
+  FOOTBALL_API_TEAM_ID: 1063
+  FOOTBALL_API_SEASON: 2023
+
+jobs:
+  teams:
+    name: Update teams
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/install
+      - run: node ace fetch:teams
+
+  standings:
+    name: Update standings
+    runs-on: ubuntu-latest
+    needs: teams
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/install
+      - run: node ace fetch:standings
+
+  players:
+    name: Update players
+    runs-on: ubuntu-latest
+    needs: teams
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/install
+      - run: node ace fetch:players
+
+  fixtures:
+    name: Update fixtures
+    runs-on: ubuntu-latest
+    needs: teams
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/install
+      - run: node ace fetch:fixtures
