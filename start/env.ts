@@ -37,5 +37,6 @@ export default await Env.create(new URL('../', import.meta.url), {
   FOOTBALL_API_KEY: Env.schema.string(),
   FOOTBALL_API_ENDPOINT: Env.schema.string(),
   FOOTBALL_API_LEAGUE_ID: Env.schema.number(),
+  FOOTBALL_API_TEAM_ID: Env.schema.number(),
   FOOTBALL_API_SEASON: Env.schema.number(),
 })

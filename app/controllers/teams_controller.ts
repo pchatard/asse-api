@@ -7,8 +7,6 @@ export default class TeamsController {
   constructor(protected teamService: TeamsService) {}
 
   async show({ params }: HttpContext) {
-    const team = this.teamService.getTeam(params.id)
-
-    return team
+    return await this.teamService.getTeam(params.id)
   }
 }
